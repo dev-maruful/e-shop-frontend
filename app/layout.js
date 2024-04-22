@@ -1,10 +1,11 @@
-import { Plus_Jakarta_Sans } from "next/font/google";
+import { DM_Sans } from "next/font/google";
 import "./globals.css";
+import Header from "@/components/shared/Header";
 
-const plus_jakarta_sans_init = Plus_Jakarta_Sans({
+const dm_sans_init = DM_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
-  variable: "--font-plus_jakarta_sans",
+  variable: "--font-dm_sans",
 });
 
 export const metadata = {
@@ -15,9 +16,8 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${plus_jakarta_sans_init.variable} font-plus_jakarta_sans text-gray-800`}
-      >
+      <body className={`${dm_sans_init.variable} font-dm_sans text-gray-800`}>
+        <Header />
         {children}
       </body>
     </html>
