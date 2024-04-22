@@ -1,7 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client";
 
-import loginBackground from "@/assets/images/login-bg.svg";
 import eShopLogo from "@/assets/logos/e-shop-logo.svg";
 import TextInputField from "@/components/forms/TextInputField";
 import Image from "next/image";
@@ -10,19 +9,22 @@ import { useState } from "react";
 import facebookLogo from "@/assets/logos/facebook-logo.svg";
 import googleLogo from "@/assets/logos/google-logo.svg";
 import appleLogo from "@/assets/logos/apple-logo.svg";
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
+import Button from "@/components/common/Button";
 
 export default function LoginPage() {
   const [backendErrors, setBackendErrors] = useState({});
+  const [isShowPassword, setIsShowPassword] = useState(false);
 
   const handleChange = () => {
     console.log("state changing");
   };
 
   return (
-    <div className="flex flex-col items-center justify-center w-full overflow-hidden bg-black">
+    <div className="flex flex-col items-center justify-center w-full overflow-hidden bg-gradient-to-r from-gray-200 via-indigo-200 to-gray-200">
       <div className="flex items-center justify-center w-full ">
-        <div className="px-8 my-11 pt-10 pb-8 bg-white rounded-2xl w-[514px]">
-          <div className="flex justify-center mb-[30px]">
+        <div className="px-5 md:px-8 md:my-11 py-24 md:pt-10 md:pb-8 bg-white md:rounded-2xl w-[514px]">
+          <div className="flex justify-center mb-10 md:mb-[30px]">
             <Link href="/">
               <Image src={eShopLogo} alt="Shop Logo" />
             </Link>
@@ -46,7 +48,7 @@ export default function LoginPage() {
               />
             </div>
 
-            <div>
+            <div className="relative">
               <TextInputField
                 label="Password"
                 id="password"
@@ -56,29 +58,50 @@ export default function LoginPage() {
                 placeholder="minimum 8 characters"
                 errors={backendErrors}
               />
+
+              <EyeIcon
+                color="#6366f1"
+                height={20}
+                width={20}
+                className={`absolute bottom-2.5 md:bottom-2 right-[16.5px] cursor-pointer ${
+                  isShowPassword ? "hidden" : "visible"
+                }`}
+                onClick={() => setIsShowPassword(true)}
+              />
+              <EyeSlashIcon
+                color="#6366f1"
+                height={20}
+                width={20}
+                className={`absolute bottom-2.5 md:bottom-2 right-[16.5px] cursor-pointer ${
+                  !isShowPassword ? "hidden" : "visible"
+                }`}
+                onClick={() => setIsShowPassword(false)}
+              />
             </div>
 
             <div className="flex items-center justify-between mt-2 mb-6">
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2 md:gap-3">
                 <input
                   type="checkbox"
                   className="w-5 h-5 border border-gray-300 rounded-md appearance-none cursor-pointer checked:bg-blue-600"
                 />
-                <p className="font-medium text-gray-600">Remember me</p>
+                <p className="font-normal text-gray-600 md:font-medium text-body-small md:text-body-medium">
+                  Remember me
+                </p>
               </div>
 
-              <p className="font-medium text-indigo-800">Forgot Password?</p>
+              <p className="font-normal text-indigo-800 text-body-small md:text-body-medium md:font-medium">
+                Forgot Password?
+              </p>
             </div>
 
-            <button className="w-full py-3 font-semibold text-white bg-indigo-600 rounded-md">
-              Login
-            </button>
+            <Button text="Login" />
 
-            <div className="mt-4 text-center">
+            <div className="mt-4 text-center text-body-small md:text-body-medium">
               <p>
                 Don't have an account?{" "}
-                <span className="font-medium text-indigo-800 text-body-large">
-                  Create Account
+                <span className="font-medium text-indigo-800">
+                  <Link href="/registration">Create Account</Link>
                 </span>
               </p>
             </div>
